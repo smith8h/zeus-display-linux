@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Builds Zeus Display and installs it for the current user (no root needed):
-#   binary + icons  -> ~/Apps/ZeusDisplay
+# Builds Zeus Display and installs it for the system:
+#   binary          -> /usr/bin
+#   icons           -> ~/.local/share/icons/hicolor
 #   menu entry      -> ~/.local/share/applications
 #   login entry     -> ~/.config/autostart   (skip with --no-autostart)
 # Access to the USB display needs a one-time udev rule; the script tells you if it's missing.
@@ -8,7 +9,7 @@ set -euo pipefail
 
 APP_ID=io.github.zeusdisplay.ZeusDisplay
 SRC="$(cd "$(dirname "$0")" && pwd)"
-DEST="$HOME/Apps/ZeusDisplay"
+DEST="/usr/bin"
 AUTOSTART=1
 [[ "${1:-}" == "--no-autostart" ]] && AUTOSTART=0
 
@@ -16,11 +17,7 @@ cargo build --release --manifest-path "$SRC/Cargo.toml"
 
 pkill -x zeus-display 2>/dev/null && sleep 0.5 || true
 
-mkdir -p "$DEST/icons"
-install -m 755 "$SRC/target/release/zeus-display" "$DEST/zeus-display.new"
-mv -f "$DEST/zeus-display.new" "$DEST/zeus-display"
-install -m 644 "$SRC"/packaging/icons/*.svg "$DEST/icons/"
-install -m 644 "$SRC/packaging/70-zeus-display.rules" "$DEST/"
+sudo install -m 755 "$SRC/target/release/zeus-display" "$DEST/zeus-display"
 
 ICONS="${XDG_DATA_HOME:-$HOME/.local/share}/icons/hicolor"
 mkdir -p "$ICONS/scalable/apps" "$ICONS/symbolic/apps"
@@ -53,5 +50,5 @@ echo "Installed to $DEST"
 if [[ ! -f /etc/udev/rules.d/70-zeus-display.rules ]]; then
   echo
   echo "One more step: give your account access to the cooler's USB display (needs your password):"
-  echo "  sudo cp \"$DEST/70-zeus-display.rules\" /etc/udev/rules.d/ && sudo udevadm control --reload && sudo udevadm trigger"
+  echo "  sudo cp \"$SRC/packaging/70-zeus-display.rules\" /etc/udev/rules.d/ && sudo udevadm control --reload && sudo udevadm trigger"
 fi
