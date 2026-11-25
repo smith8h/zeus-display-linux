@@ -1,0 +1,2 @@
+# Lets the person signed in at the desktop write to the Zeus cooler display (USB 5131:2007).
+KERNEL=="hidraw*", ATTRS{idVendor}=="5131", ATTRS{idProduct}=="2007", TAG+="uaccess"

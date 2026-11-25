@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b1c21"/>
+      <stop offset="1" stop-color="#0b0c0e"/>
+    </linearGradient>
+    <linearGradient id="heat" x1="0" y1="1" x2="1" y2="0.6">
+      <stop offset="0" stop-color="#58b4ff"/>
+      <stop offset="0.38" stop-color="#7de3c3"/>
+      <stop offset="0.7" stop-color="#ffb547"/>
+      <stop offset="1" stop-color="#ff5a4a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.52" r="0.5">
+      <stop offset="0" stop-color="#ffb547" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ffb547" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="16" y="16" width="224" height="224" rx="52" fill="url(#bg)"/>
+  <rect x="16.5" y="16.5" width="223" height="223" rx="51.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+  <circle cx="128" cy="132" r="92" fill="url(#glow)"/>
+  <!-- 270° track and heat arc, centre (128,132), r 70 -->
+  <path d="M 78.5 181.5 A 70 70 0 1 1 177.5 181.5" fill="none" stroke="#ffffff" stroke-opacity="0.09" stroke-width="16" stroke-linecap="round"/>
+  <path d="M 78.5 181.5 A 70 70 0 1 1 196.2 116.2" fill="none" stroke="url(#heat)" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="196.2" cy="116.2" r="8" fill="#0b0c0e"/>
+  <circle cx="196.2" cy="116.2" r="4.5" fill="#ff6a4a"/>
+  <!-- bolt -->
+  <path d="M 138 86 L 104 140 L 126 140 L 116 180 L 152 122 L 130 122 Z" fill="#eeece8" stroke="#eeece8" stroke-width="4" stroke-linejoin="round"/>
+</svg>

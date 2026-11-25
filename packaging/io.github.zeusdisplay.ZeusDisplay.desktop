@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Zeus Display
+Comment=Live CPU temperature and load on your cooler's display
+Exec=@EXEC@
+Icon=io.github.zeusdisplay.ZeusDisplay
+Terminal=false
+Categories=System;Monitor;
+Keywords=cooler;temperature;cpu;sensors;lcd;
+StartupNotify=true
+SingleMainWindow=true

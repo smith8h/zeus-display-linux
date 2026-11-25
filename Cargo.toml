@@ -1,0 +1,29 @@
+[package]
+name = "zeus-display"
+description = "Live CPU temperature and load on your Zeus cooler's USB display, with a GTK 4 dashboard"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+authors = ["Hussein Shakir"]
+rust-version = "1.92"
+publish = false
+
+[[bin]]
+name = "zeus-display"
+path = "src/main.rs"
+
+[dependencies]
+gtk = { package = "gtk4", version = "0.11", features = ["v4_16"] }
+async-channel = "2"
+pangocairo = "0.22"
+signal-hook = { version = "0.3", default-features = false, features = ["iterator"] }
+ksni = { version = "0.3", default-features = false, features = ["blocking", "async-io"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
+panic = "abort"
+opt-level = 3
